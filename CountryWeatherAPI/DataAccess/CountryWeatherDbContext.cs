@@ -1,21 +1,18 @@
 using CountryWeatherAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
 namespace CountryWeatherAPI.DataAccess
 {
     public class CountryWeatherDbContext : DbContext
     {
         protected readonly IConfiguration Configuration;
-        public CountryWeatherDbContext(IConfiguration configuration)
+
+        public CountryWeatherDbContext(DbContextOptions<CountryWeatherDbContext> options)
+            : base(options)
         {
-            Configuration = configuration;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            // connect to postgres with connection string from app settings
-            options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
-        }
         public DbSet<Country> Countries { get; set; }
         public DbSet<ResponsiblePerson> ResponsiblePersons { get; set; }
         public DbSet<Weather> Weathers { get; set; }

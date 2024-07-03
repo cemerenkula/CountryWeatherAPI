@@ -104,3 +104,4 @@
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.genruntimeconfig.cache
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/ref/CountryWeatherAPI.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/PhoneNumbers.dll
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.sourcelink.json
