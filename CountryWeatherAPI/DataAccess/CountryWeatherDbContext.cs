@@ -1,3 +1,5 @@
+using CountryWeatherAPI.Concrete;
+using CountryWeatherAPI.DataAccess.DataConfigurations;
 using CountryWeatherAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,24 +21,12 @@ namespace CountryWeatherAPI.DataAccess
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure relationships and other settings
-            modelBuilder.Entity<Country>()
-                .HasOne(c => c.ResponsiblePerson)
-                .WithMany(r => r.Countries)
-                .HasForeignKey(c => c.ResponsiblePersonId);
-
-            modelBuilder.Entity<Country>()
-                .HasOne(c => c.Weather)
-                .WithOne(w => w.Country)
-                .HasForeignKey<Weather>(w => w.CountryId);
-
-            modelBuilder.Entity<ResponsiblePerson>()
-                .HasIndex(r => r.Email)
-                .IsUnique();
-
-            modelBuilder.Entity<ResponsiblePerson>()
-                .HasIndex(r => new { r.FirstName, r.LastName, r.BirthDate })
-                .IsUnique();
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new CountryRelationshipConfiguration());
+            modelBuilder.ApplyConfiguration(new ResponsiblePersonRelationshipConfiguration());
+            modelBuilder.ApplyConfiguration(new WeatherRelationshipConfiguration());
         }
     }
 }

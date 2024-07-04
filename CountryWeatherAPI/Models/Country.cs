@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CountryWeatherAPI.Models;
 
 public class Country
@@ -8,7 +11,7 @@ public class Country
     public int LatitudeRangeEnd { get; set; }
     public int LongitudeRangeStart { get; set; }
     public int LongitudeRangeEnd { get; set; }
-    public int ResponsiblePersonId { get; set; }
+    public int? ResponsiblePersonId { get; set; }
     public ResponsiblePerson ResponsiblePerson { get; set; }
     public Weather Weather { get; set; }
 }
