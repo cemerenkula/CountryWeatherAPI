@@ -188,4 +188,4 @@ new Country { Id = 187, Name = "Venezuela (Bolivarian Republic of)", LatitudeRan
 new Country { Id = 188, Name = "Viet Nam", LatitudeRangeStart = 9, LatitudeRangeEnd = 24, LongitudeRangeStart = 102, LongitudeRangeEnd = 110, ResponsiblePersonId = null },
 new Country { Id = 189, Name = "Yemen", LatitudeRangeStart = 12, LatitudeRangeEnd = 19, LongitudeRangeStart = 42, LongitudeRangeEnd = 54, ResponsiblePersonId = null },
 new Country { Id = 190, Name = "Zambia", LatitudeRangeStart = -18, LatitudeRangeEnd = -8, LongitudeRangeStart = 22, LongitudeRangeEnd = 34, ResponsiblePersonId = null },
-new Country { Id = 191, Name = "Zimbabwe", LatitudeRangeStart = -22, LatitudeRangeEnd = -15, LongitudeRangeStart = 26, LongitudeRangeEnd = 34, ResponsiblePersonId = null },
+new Country { Id = 191, Name = "Zimbabwe", LatitudeRangeStart = -22, LatitudeRangeEnd = -15, LongitudeRangeStart = 26, LongitudeRangeEnd = 34, ResponsiblePersonId = null }

@@ -9,7 +9,9 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<Country, CountryResponseDto>();
-        CreateMap<CountryRequestDto, Country>();
-        CreateMap<CountryResponseDto, Country>();
+        CreateMap<CountryPostDto, Country>();
+        CreateMap<CountryPutDto, Country>();
+        CreateMap<ResponsiblePersonPostDto, ResponsiblePerson>();
+
     }
 }

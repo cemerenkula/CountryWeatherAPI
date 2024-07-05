@@ -55,22 +55,23 @@ namespace CountryWeatherAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCountry([FromBody] CountryRequestDto countryRequestDto)
+        public IActionResult AddCountry([FromBody] CountryPostDto countryPostDto)
         {
-            var country = _mapper.Map<Country>(countryRequestDto);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            var country = _mapper.Map<Country>(countryPostDto);
             _countryRepository.AddCountry(country);
+
             return CreatedAtAction(nameof(GetCountryById), new { id = country.Id }, country);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCountry(int id, [FromBody] Country country)
+        public IActionResult UpdateCountry(int id, [FromBody] CountryPutDto countryPutDto)
         {
-            if (id != country.Id)
+            if (id != countryPutDto.Id)
             {
                 return BadRequest("Country ID mismatch");
             }
@@ -81,6 +82,7 @@ namespace CountryWeatherAPI.Controllers
                 return NotFound();
             }
 
+            var country = _mapper.Map<Country>(countryPutDto);
             _countryRepository.UpdateCountry(country);
             return NoContent();
         }

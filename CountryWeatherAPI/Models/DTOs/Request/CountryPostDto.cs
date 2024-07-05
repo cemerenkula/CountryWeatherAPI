@@ -1,8 +1,7 @@
 namespace CountryWeatherAPI.Models.DTOs.Request;
 
-public class CountryRequestDto
+public class CountryPostDto
 {
-    public int Id { get; set; }
     public string Name { get; set; }
     public int LatitudeRangeStart { get; set; }
     public int LatitudeRangeEnd { get; set; }
