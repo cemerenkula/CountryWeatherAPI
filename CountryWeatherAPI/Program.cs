@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "CountryWeatherAPI", Version = "v1" });
 });
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // Register DbContext with dependency injection
 builder.Services.AddDbContext<CountryWeatherDbContext>(options =>

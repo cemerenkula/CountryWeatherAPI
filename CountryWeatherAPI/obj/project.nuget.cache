@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WkrzYMjJiY8=",
+  "dgSpecHash": "HtALAfMTdgHeV8cxlQIw369K6QbwfZORlkhc4NnomyDTRP2uhZ9whT2uY3Tw1/lsuFKBw350+cI8VHY0mjGjYA==",
   "success": true,
   "projectFilePath": "/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/CountryWeatherAPI.csproj",
   "expectedPackageFiles": [
+    "/Users/cemerenkula/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/cemerenkula/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/libphonenumber-csharp/8.13.39/libphonenumber-csharp.8.13.39.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/microsoft.aspnetcore.openapi/8.0.6/microsoft.aspnetcore.openapi.8.0.6.nupkg.sha512",
@@ -13,6 +15,7 @@
     "/Users/cemerenkula/.nuget/packages/microsoft.codeanalysis.csharp/4.5.0/microsoft.codeanalysis.csharp.4.5.0.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/microsoft.codeanalysis.csharp.workspaces/4.5.0/microsoft.codeanalysis.csharp.workspaces.4.5.0.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/microsoft.codeanalysis.workspaces.common/4.5.0/microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512",
+    "/Users/cemerenkula/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/microsoft.entityframeworkcore/8.0.6/microsoft.entityframeworkcore.8.0.6.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.6/microsoft.entityframeworkcore.abstractions.8.0.6.nupkg.sha512",
     "/Users/cemerenkula/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.6/microsoft.entityframeworkcore.analyzers.8.0.6.nupkg.sha512",

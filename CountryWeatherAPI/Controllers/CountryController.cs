@@ -3,25 +3,31 @@ using CountryWeatherAPI.Abstract;
 using CountryWeatherAPI.Models;
 using System;
 using System.Collections.Generic;
+using AutoMapper;
+using CountryWeatherAPI.Models.DTOs.Response;
+using CountryWeatherAPI.Models.DTOs.Request;
 
 namespace CountryWeatherAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/countries")]
     public class CountryController : ControllerBase
     {
         private readonly ICountryRepository _countryRepository;
+        private readonly IMapper _mapper;
 
-        public CountryController(ICountryRepository countryRepository)
+        public CountryController(ICountryRepository countryRepository, IMapper mapper)
         {
             _countryRepository = countryRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetAllCountries()
         {
             var countries = _countryRepository.GetAllCountries();
-            return Ok(countries);
+            var countryDtos = _mapper.Map<IEnumerable<CountryResponseDto>>(countries);
+            return Ok(countryDtos);
         }
 
         [HttpGet("{id}")]
@@ -32,12 +38,26 @@ namespace CountryWeatherAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(country);
+            var countryDtos = _mapper.Map<CountryResponseDto>(country);
+            return Ok(countryDtos);
+        }
+        
+        [HttpGet("{lat}/{lon}")]
+        public IActionResult GetCountryByCoordinates(int lat, int lon)
+        {
+            var country = _countryRepository.GetCountryByCoordinates(lat, lon);
+            if (country == null)
+            {
+                return NotFound();
+            }
+            var countryDtos = _mapper.Map<CountryResponseDto>(country);
+            return Ok(countryDtos);
         }
 
         [HttpPost]
-        public IActionResult AddCountry([FromBody] Country country)
+        public IActionResult AddCountry([FromBody] CountryRequestDto countryRequestDto)
         {
+            var country = _mapper.Map<Country>(countryRequestDto);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
