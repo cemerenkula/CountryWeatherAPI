@@ -14,6 +14,8 @@ namespace CountryWeatherAPI.Abstract
         // Adds a new responsible person to the database
         void AddResponsiblePerson(ResponsiblePerson responsiblePerson);
 
+        void AssignResponsiblePerson(int responsiblePersonId, int countryId);
+
         // Updates an existing responsible person in the database
         void UpdateResponsiblePerson(ResponsiblePerson responsiblePerson);
 

@@ -27,7 +27,8 @@ namespace CountryWeatherAPI.Controllers
         {
             var countries = _countryRepository.GetAllCountries();
             var countryDtos = _mapper.Map<IEnumerable<CountryResponseDto>>(countries);
-            return Ok(countryDtos);
+            var orderedCountries = countryDtos.OrderBy(c => c.Id);
+            return Ok(orderedCountries);
         }
 
         [HttpGet("{id}")]
@@ -81,9 +82,14 @@ namespace CountryWeatherAPI.Controllers
             {
                 return NotFound();
             }
+            
+            existingCountry.Name = countryPutDto.Name;
+            existingCountry.LatitudeRangeStart = countryPutDto.LatitudeRangeStart;
+            existingCountry.LatitudeRangeEnd = countryPutDto.LatitudeRangeEnd;
+            existingCountry.LongitudeRangeStart = countryPutDto.LongitudeRangeStart;
+            existingCountry.LongitudeRangeEnd = countryPutDto.LongitudeRangeEnd;
 
-            var country = _mapper.Map<Country>(countryPutDto);
-            _countryRepository.UpdateCountry(country);
+            _countryRepository.UpdateCountry(existingCountry);
             return NoContent();
         }
 

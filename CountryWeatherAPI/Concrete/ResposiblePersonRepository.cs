@@ -33,6 +33,28 @@ namespace CountryWeatherAPI.Concrete
             _context.SaveChanges();
         }
 
+        public void AssignResponsiblePerson(int responsiblePersonId, int countryId)
+        {
+            var responsiblePerson = _context.ResponsiblePersons.Find(responsiblePersonId);
+            var country = _context.Countries.Find(countryId);
+
+            if (responsiblePerson == null)
+            {
+                throw new ArgumentException($"Responsible person with ID {responsiblePersonId} not found.");
+            }
+
+            if (country == null)
+            {
+                throw new ArgumentException($"Country with ID {countryId} not found.");
+            }
+            
+            responsiblePerson.Countries.Add(country);
+            country.ResponsiblePersonId = responsiblePersonId;
+            country.ResponsiblePerson = responsiblePerson;
+
+            _context.SaveChanges();
+        }
+
         public void UpdateResponsiblePerson(ResponsiblePerson responsiblePerson)
         {
             _context.ResponsiblePersons.Update(responsiblePerson);

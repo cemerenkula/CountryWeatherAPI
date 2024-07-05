@@ -10,8 +10,6 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<Country, CountryResponseDto>();
         CreateMap<CountryPostDto, Country>();
-        CreateMap<CountryPutDto, Country>();
         CreateMap<ResponsiblePersonPostDto, ResponsiblePerson>();
-
     }
 }

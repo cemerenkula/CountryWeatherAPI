@@ -13,11 +13,13 @@ namespace CountryWeatherAPI.Controllers
     public class ResponsiblePersonController : ControllerBase
     {
         private readonly IResponsiblePersonRepository _responsiblePersonRepository;
+        private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
         
-        public ResponsiblePersonController(IResponsiblePersonRepository responsiblePersonRepository, IMapper mapper)
+        public ResponsiblePersonController(IResponsiblePersonRepository responsiblePersonRepository, ICountryRepository countryRepository, IMapper mapper)
         {
             _responsiblePersonRepository = responsiblePersonRepository;
+            _countryRepository = countryRepository;
             _mapper = mapper;
         }
 
@@ -53,6 +55,23 @@ namespace CountryWeatherAPI.Controllers
             return CreatedAtAction(nameof(GetResponsiblePersonById), new { id = responsiblePerson.Id },
                 responsiblePerson);
         }
+        
+        [HttpPost("assign")]
+        public IActionResult AssignResponsiblePersonToCountry([FromBody] ResponsiblePersonAssignmentDto assignmentDto)
+        {
+            var responsiblePersonId = assignmentDto.ResponsiblePersonId;
+            var countryId = assignmentDto.CountryId;
+
+            try
+            {
+                _responsiblePersonRepository.AssignResponsiblePerson(responsiblePersonId, countryId);
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
         [HttpPut("{id}")]
         public IActionResult UpdateResponsiblePerson(int id, [FromBody] ResponsiblePersonPutDto responsiblePersonPutDto)
@@ -67,9 +86,14 @@ namespace CountryWeatherAPI.Controllers
             {
                 return NotFound();
             }
+            
+            existingResponsiblePerson.FirstName = responsiblePersonPutDto.FirstName;
+            existingResponsiblePerson.LastName = responsiblePersonPutDto.LastName;
+            existingResponsiblePerson.BirthDate = responsiblePersonPutDto.BirthDate;
+            existingResponsiblePerson.Email = responsiblePersonPutDto.Email;
+            existingResponsiblePerson.PhoneNumber = responsiblePersonPutDto.PhoneNumber;
 
-            var responsiblePerson = _mapper.Map<ResponsiblePerson>(responsiblePersonPutDto);
-            _responsiblePersonRepository.UpdateResponsiblePerson(responsiblePerson);
+            _responsiblePersonRepository.UpdateResponsiblePerson(existingResponsiblePerson);
             return NoContent();
         }
 
