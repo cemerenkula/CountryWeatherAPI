@@ -21,5 +21,7 @@ namespace CountryWeatherAPI.Abstract
 
         // Deletes a responsible person from the database
         void DeleteResponsiblePerson(int id);
+
+        void Save();
     }
 }

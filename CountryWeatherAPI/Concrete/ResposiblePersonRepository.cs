@@ -4,6 +4,7 @@ using System.Linq;
 using CountryWeatherAPI.Abstract;
 using CountryWeatherAPI.DataAccess;
 using CountryWeatherAPI.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CountryWeatherAPI.Concrete
@@ -48,9 +49,9 @@ namespace CountryWeatherAPI.Concrete
                 throw new ArgumentException($"Country with ID {countryId} not found.");
             }
             
-            responsiblePerson.Countries.Add(country);
+
             country.ResponsiblePersonId = responsiblePersonId;
-            country.ResponsiblePerson = responsiblePerson;
+            _context.Countries.Update(country);
 
             _context.SaveChanges();
         }
@@ -70,5 +71,11 @@ namespace CountryWeatherAPI.Concrete
                 _context.SaveChanges();
             }
         }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+        
     }
 }
