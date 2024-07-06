@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CountryWeatherAPI.Models;
 
 public class ResponsiblePerson
