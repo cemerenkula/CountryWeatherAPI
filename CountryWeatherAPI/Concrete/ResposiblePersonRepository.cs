@@ -20,12 +20,14 @@ namespace CountryWeatherAPI.Concrete
 
         public List<ResponsiblePerson> GetAllResponsiblePersons()
         {
-            return _context.ResponsiblePersons.ToList();
+            return _context.ResponsiblePersons.Include(rp => rp.Countries).ToList();
         }
 
         public ResponsiblePerson GetResponsiblePersonById(int id)
         {
-            return _context.ResponsiblePersons.Find(id);
+            return _context.ResponsiblePersons
+                .Include(rp => rp.Countries)
+                .FirstOrDefault(rp => rp.Id == id);
         }
 
         public void AddResponsiblePerson(ResponsiblePerson responsiblePerson)
@@ -55,6 +57,41 @@ namespace CountryWeatherAPI.Concrete
 
             _context.SaveChanges();
         }
+        
+        public void DeassignResponsiblePerson(int responsiblePersonId, int countryId)
+        {
+            var responsiblePerson = _context.ResponsiblePersons
+                .Include(rp => rp.Countries)
+                .FirstOrDefault(rp => rp.Id == responsiblePersonId);
+
+            var country = _context.Countries.Find(countryId);
+
+            if (responsiblePerson == null)
+            {
+                throw new ArgumentException($"Responsible person with ID {responsiblePersonId} not found.");
+            }
+
+            if (country == null)
+            {
+                throw new ArgumentException($"Country with ID {countryId} not found.");
+            }
+
+            if (country.ResponsiblePersonId != responsiblePersonId)
+            {
+                throw new ArgumentException($"Country with ID {countryId} is not assigned to responsible person with ID {responsiblePersonId}.");
+            }
+
+
+            country.ResponsiblePersonId = null;
+            country.ResponsiblePerson = null;
+
+            _context.Countries.Update(country);
+            
+            responsiblePerson.Countries.Remove(country);
+
+            _context.SaveChanges();
+        }
+
 
         public void UpdateResponsiblePerson(ResponsiblePerson responsiblePerson)
         {

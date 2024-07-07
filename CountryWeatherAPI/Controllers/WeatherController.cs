@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace CountryWeatherAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/weathers")]
     public class WeatherController : ControllerBase
     {
         private readonly IWeatherRepository _weatherRepository;

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CountryWeatherAPI.Models;
 
@@ -12,6 +13,8 @@ public class Country
     public int LongitudeRangeStart { get; set; }
     public int LongitudeRangeEnd { get; set; }
     public int? ResponsiblePersonId { get; set; }
+    [JsonIgnore]
     public ResponsiblePerson ResponsiblePerson { get; set; }
+    [JsonIgnore]
     public Weather Weather { get; set; }
 }

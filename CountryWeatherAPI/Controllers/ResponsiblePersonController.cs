@@ -72,6 +72,33 @@ namespace CountryWeatherAPI.Controllers
                 return NotFound(ex.Message);
             }
         }
+        
+        [HttpPost("deassign")]
+        public IActionResult DeassignResponsiblePersonFromCountry([FromBody] ResponsiblePersonAssignmentDto assignmentDto)
+        {
+            var responsiblePersonId = assignmentDto.ResponsiblePersonId;
+            var countryId = assignmentDto.CountryId;
+
+            try
+            {
+                _responsiblePersonRepository.DeassignResponsiblePerson(responsiblePersonId, countryId);
+
+                // Retrieve the updated responsible person with countries
+                var responsiblePerson = _responsiblePersonRepository.GetResponsiblePersonById(responsiblePersonId);
+
+                if (responsiblePerson == null)
+                {
+                    return NotFound("Responsible person not found.");
+                }
+
+                return Ok(responsiblePerson); // Return the responsible person with updated countries
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpPut("{id}")]
         public IActionResult UpdateResponsiblePerson(int id, [FromBody] ResponsiblePersonPutDto responsiblePersonPutDto)
