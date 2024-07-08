@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Net.Http;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "CountryWeatherAPI", Version = "v1" });
 });
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddHttpClient();
+
 
 // Register DbContext with dependency injection
 builder.Services.AddDbContext<CountryWeatherDbContext>(options =>
@@ -31,6 +35,13 @@ builder.Services.AddDbContext<CountryWeatherDbContext>(options =>
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IResponsiblePersonRepository, ResponsiblePersonRepository>();
 builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
+builder.Services.AddSingleton(sp =>
+    new WeatherRepository(
+        sp.GetRequiredService<CountryWeatherDbContext>(),
+        sp.GetRequiredService<HttpClient>(),
+        sp.GetRequiredService<IConfiguration>()
+    )
+);
 
 var app = builder.Build();
 

@@ -106,3 +106,5 @@
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.sourcelink.json
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/AutoMapper.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/WeatherExample.json

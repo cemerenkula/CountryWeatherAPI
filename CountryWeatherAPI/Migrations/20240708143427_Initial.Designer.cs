@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CountryWeatherAPI.Migrations
 {
     [DbContext(typeof(CountryWeatherDbContext))]
-    [Migration("20240706140511_Initial")]
+    [Migration("20240708143427_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -1826,17 +1826,11 @@ namespace CountryWeatherAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Clouds")
+                    b.Property<int?>("CountryId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("integer");
-
-                    b.Property<float>("DewPoint")
-                        .HasColumnType("real");
-
-                    b.Property<float>("FeelsLike")
-                        .HasColumnType("real");
+                    b.Property<double>("FeelsLike")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("Humidity")
                         .HasColumnType("integer");
@@ -1847,26 +1841,16 @@ namespace CountryWeatherAPI.Migrations
                     b.Property<int>("Longitude")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Pressure")
-                        .HasColumnType("integer");
+                    b.Property<double>("Pressure")
+                        .HasColumnType("double precision");
 
-                    b.Property<float>("Temperature")
-                        .HasColumnType("real");
+                    b.Property<double>("Temperature")
+                        .HasColumnType("double precision");
 
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<float>("Uvi")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Visibility")
-                        .HasColumnType("integer");
-
                     b.Property<string>("WeatherDescription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("WeatherIcon")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -1877,11 +1861,11 @@ namespace CountryWeatherAPI.Migrations
                     b.Property<int>("WindDeg")
                         .HasColumnType("integer");
 
-                    b.Property<float>("WindGust")
-                        .HasColumnType("real");
+                    b.Property<double>("WindGust")
+                        .HasColumnType("double precision");
 
-                    b.Property<float>("WindSpeed")
-                        .HasColumnType("real");
+                    b.Property<double>("WindSpeed")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -1904,9 +1888,7 @@ namespace CountryWeatherAPI.Migrations
                 {
                     b.HasOne("CountryWeatherAPI.Models.Country", "Country")
                         .WithOne("Weather")
-                        .HasForeignKey("CountryWeatherAPI.Models.Weather", "CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryWeatherAPI.Models.Weather", "CountryId");
 
                     b.Navigation("Country");
                 });

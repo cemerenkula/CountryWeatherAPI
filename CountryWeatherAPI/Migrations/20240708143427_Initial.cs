@@ -60,24 +60,19 @@ namespace CountryWeatherAPI.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CountryId = table.Column<int>(type: "integer", nullable: false),
                     Latitude = table.Column<int>(type: "integer", nullable: false),
                     Longitude = table.Column<int>(type: "integer", nullable: false),
-                    Temperature = table.Column<float>(type: "real", nullable: false),
-                    FeelsLike = table.Column<float>(type: "real", nullable: false),
-                    Pressure = table.Column<int>(type: "integer", nullable: false),
-                    Humidity = table.Column<int>(type: "integer", nullable: false),
-                    DewPoint = table.Column<float>(type: "real", nullable: false),
-                    Uvi = table.Column<float>(type: "real", nullable: false),
-                    Clouds = table.Column<int>(type: "integer", nullable: false),
-                    Visibility = table.Column<int>(type: "integer", nullable: false),
-                    WindSpeed = table.Column<float>(type: "real", nullable: false),
-                    WindDeg = table.Column<int>(type: "integer", nullable: false),
-                    WindGust = table.Column<float>(type: "real", nullable: false),
                     WeatherMain = table.Column<string>(type: "text", nullable: false),
                     WeatherDescription = table.Column<string>(type: "text", nullable: false),
-                    WeatherIcon = table.Column<string>(type: "text", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Temperature = table.Column<double>(type: "double precision", nullable: false),
+                    FeelsLike = table.Column<double>(type: "double precision", nullable: false),
+                    Pressure = table.Column<double>(type: "double precision", nullable: false),
+                    Humidity = table.Column<int>(type: "integer", nullable: false),
+                    WindSpeed = table.Column<double>(type: "double precision", nullable: false),
+                    WindDeg = table.Column<int>(type: "integer", nullable: false),
+                    WindGust = table.Column<double>(type: "double precision", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CountryId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,8 +81,7 @@ namespace CountryWeatherAPI.Migrations
                         name: "FK_Weathers_Countries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(

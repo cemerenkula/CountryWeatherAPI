@@ -3,6 +3,10 @@ using CountryWeatherAPI.Abstract;
 using CountryWeatherAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using CountryWeatherAPI.Models.DTOs.Request;
+using Newtonsoft.Json;
+
 
 namespace CountryWeatherAPI.Controllers
 {
@@ -11,7 +15,7 @@ namespace CountryWeatherAPI.Controllers
     public class WeatherController : ControllerBase
     {
         private readonly IWeatherRepository _weatherRepository;
-
+        
         public WeatherController(IWeatherRepository weatherRepository)
         {
             _weatherRepository = weatherRepository;
@@ -87,6 +91,20 @@ namespace CountryWeatherAPI.Controllers
 
             _weatherRepository.DeleteWeatherData(id);
             return NoContent();
+        }
+        
+        [HttpPost("update/{lat}/{lon}")]
+        public IActionResult UpdateWeatherData(double lat, double lon)
+        {
+            try
+            {
+                _weatherRepository.UpdateWeatherWithRequest(lat, lon);
+                return Ok("Weather data updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

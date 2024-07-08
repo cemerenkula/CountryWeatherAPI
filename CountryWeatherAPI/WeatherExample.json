@@ -1,0 +1,44 @@
+{
+  "coord": {
+    "lon": 40,
+    "lat": 40
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 285.04,
+    "feels_like": 284.43,
+    "temp_min": 285.04,
+    "temp_max": 285.04,
+    "pressure": 1012,
+    "humidity": 82,
+    "sea_level": 1012,
+    "grnd_level": 799
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.64,
+    "deg": 356,
+    "gust": 1.57
+  },
+  "clouds": {
+    "all": 100
+  },
+  "dt": 1720385792,
+  "sys": {
+    "country": "TR",
+    "sunrise": 1720317490,
+    "sunset": 1720371081
+  },
+  "timezone": 10800,
+  "id": 303147,
+  "name": "Otlukbeli",
+  "cod": 200
+}

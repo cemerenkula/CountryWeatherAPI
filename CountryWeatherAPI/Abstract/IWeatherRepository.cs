@@ -22,5 +22,7 @@ namespace CountryWeatherAPI.Abstract
 
         // Deletes weather data from the database
         void DeleteWeatherData(int weatherId);
+
+        void UpdateWeatherWithRequest(double latitude, double longitude);
     }
 }
