@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoMapper;
 using CountryWeatherAPI.Models.DTOs.Request;
+using PhoneNumbers;
 
 namespace CountryWeatherAPI.Controllers
 {
@@ -46,6 +47,23 @@ namespace CountryWeatherAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
+                return BadRequest(ModelState);
+            }
+
+            // Validate phone number using libphonenumber
+            var phoneNumberUtil = PhoneNumberUtil.GetInstance();
+            try
+            {
+                var phoneNumberProto = phoneNumberUtil.Parse(responsiblePersonPostDto.PhoneNumber, null);
+                if (!phoneNumberUtil.IsValidNumber(phoneNumberProto))
+                {
+                    ModelState.AddModelError("PhoneNumber", "Invalid phone number format.");
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (NumberParseException)
+            {
+                ModelState.AddModelError("PhoneNumber", "Invalid phone number format.");
                 return BadRequest(ModelState);
             }
 

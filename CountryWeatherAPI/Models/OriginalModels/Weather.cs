@@ -1,8 +1,15 @@
+
+
+using System.Text.Json.Serialization;
+
 namespace CountryWeatherAPI.Models;
 
 public class Weather
 {
+    [JsonIgnore]
     public int Id { get; set; }
+    public int? CountryId { get; set; }
+    public string CountryName { get; set; }
     public int Latitude { get; set; }
     public int Longitude { get; set; }
     public string WeatherMain { get; set; }
@@ -15,6 +22,6 @@ public class Weather
     public int WindDeg { get; set; }
     public double WindGust { get; set; }
     public DateTime Timestamp { get; set; }
-    public int? CountryId { get; set; }
+    [JsonIgnore]
     public Country Country { get; set; }
 }

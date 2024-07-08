@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CountryWeatherAPI.Migrations
 {
     [DbContext(typeof(CountryWeatherDbContext))]
-    [Migration("20240708143427_Initial")]
+    [Migration("20240708172534_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -1828,6 +1828,10 @@ namespace CountryWeatherAPI.Migrations
 
                     b.Property<int?>("CountryId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("CountryName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<double>("FeelsLike")
                         .HasColumnType("double precision");

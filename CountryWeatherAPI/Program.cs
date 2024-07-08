@@ -38,7 +38,6 @@ builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
 builder.Services.AddSingleton(sp =>
     new WeatherRepository(
         sp.GetRequiredService<CountryWeatherDbContext>(),
-        sp.GetRequiredService<HttpClient>(),
         sp.GetRequiredService<IConfiguration>()
     )
 );

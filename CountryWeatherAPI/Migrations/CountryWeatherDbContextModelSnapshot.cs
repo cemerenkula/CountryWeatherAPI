@@ -1826,6 +1826,10 @@ namespace CountryWeatherAPI.Migrations
                     b.Property<int?>("CountryId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("CountryName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<double>("FeelsLike")
                         .HasColumnType("double precision");
 

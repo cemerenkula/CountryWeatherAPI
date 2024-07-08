@@ -60,6 +60,8 @@ namespace CountryWeatherAPI.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CountryId = table.Column<int>(type: "integer", nullable: true),
+                    CountryName = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<int>(type: "integer", nullable: false),
                     Longitude = table.Column<int>(type: "integer", nullable: false),
                     WeatherMain = table.Column<string>(type: "text", nullable: false),
@@ -71,8 +73,7 @@ namespace CountryWeatherAPI.Migrations
                     WindSpeed = table.Column<double>(type: "double precision", nullable: false),
                     WindDeg = table.Column<int>(type: "integer", nullable: false),
                     WindGust = table.Column<double>(type: "double precision", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CountryId = table.Column<int>(type: "integer", nullable: true)
+                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

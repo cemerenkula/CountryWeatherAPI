@@ -13,13 +13,11 @@ namespace CountryWeatherAPI.Concrete
     public class WeatherRepository : IWeatherRepository
     {
         private readonly CountryWeatherDbContext _context;
-        private readonly HttpClient _httpClient;
         private readonly string _apiKey;
 
-        public WeatherRepository(CountryWeatherDbContext context, HttpClient httpClient, IConfiguration configuration)
+        public WeatherRepository(CountryWeatherDbContext context, IConfiguration configuration)
         {
             _context = context;
-            _httpClient = httpClient;
             _apiKey = configuration["OpenWeatherMap:ApiKey"];
         }
 
@@ -43,6 +41,7 @@ namespace CountryWeatherAPI.Concrete
                 Weather weather = new Weather
                 {
                     CountryId = country.Id,
+                    CountryName = country.Name,
                     Latitude = (int)Info.coord.lat,
                     Longitude = (int)Info.coord.lon,
                     WeatherMain = Info.weather[0].main,
@@ -58,7 +57,7 @@ namespace CountryWeatherAPI.Concrete
                 };
 
                 var existingWeather = _context.Weathers
-                    .FirstOrDefault(w => w.CountryId == country.Id && w.Latitude == weather.Latitude && w.Longitude == weather.Longitude);
+                    .FirstOrDefault(w => w.CountryId == country.Id);
 
                 if (existingWeather == null)
                 {
@@ -76,6 +75,8 @@ namespace CountryWeatherAPI.Concrete
                     existingWeather.WindDeg = weather.WindDeg;
                     existingWeather.WindGust = weather.WindGust;
                     existingWeather.Timestamp = weather.Timestamp;
+                    existingWeather.Latitude = weather.Latitude;
+                    existingWeather.Longitude = weather.Longitude;
                     _context.Weathers.Update(existingWeather);
                 }
 
@@ -96,7 +97,18 @@ namespace CountryWeatherAPI.Concrete
 
         public Weather GetWeatherByCoordinates(int lat, int lon)
         {
-            return _context.Weathers.FirstOrDefault(w => w.Latitude == lat && w.Longitude == lon);
+            var country = _context.Countries
+                .FirstOrDefault(c => c.LatitudeRangeStart <= lat && c.LatitudeRangeEnd >= lat &&
+                                     c.LongitudeRangeStart <= lon && c.LongitudeRangeEnd >= lon);
+            
+            if (country == null)
+            {
+                return null;
+            }
+            
+            var weather = _context.Weathers.FirstOrDefault(w => w.CountryId == country.Id);
+
+            return weather;
         }
 
         public void AddWeatherData(Weather weather)
@@ -111,14 +123,10 @@ namespace CountryWeatherAPI.Concrete
             _context.SaveChanges();
         }
 
-        public void DeleteWeatherData(int weatherId)
+        public void DeleteWeatherData(Weather weather)
         {
-            var weather = _context.Weathers.Find(weatherId);
-            if (weather != null)
-            {
                 _context.Weathers.Remove(weather);
                 _context.SaveChanges();
-            }
         }
     }
 }

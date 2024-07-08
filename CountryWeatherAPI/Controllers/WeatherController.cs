@@ -25,7 +25,8 @@ namespace CountryWeatherAPI.Controllers
         public IActionResult GetAllWeatherData()
         {
             var weatherData = _weatherRepository.GetAllWeatherData();
-            return Ok(weatherData);
+            var orderedWeatherData = weatherData.OrderBy(w => w.CountryId);
+            return Ok(orderedWeatherData);
         }
 
         [HttpGet("country/{countryId}")]
@@ -50,46 +51,16 @@ namespace CountryWeatherAPI.Controllers
             return Ok(weather);
         }
 
-        [HttpPost]
-        public IActionResult AddWeatherData([FromBody] Weather weather)
+        [HttpDelete("{countryId}")]
+        public IActionResult DeleteWeatherData(int countryId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _weatherRepository.AddWeatherData(weather);
-            return CreatedAtAction(nameof(GetWeatherByCountryId), new { countryId = weather.CountryId }, weather);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult UpdateWeatherData(int id, [FromBody] Weather weather)
-        {
-            if (id != weather.Id)
-            {
-                return BadRequest("Weather ID mismatch");
-            }
-
-            var existingWeather = _weatherRepository.GetWeatherByCountryId(id);
-            if (existingWeather == null)
-            {
-                return NotFound();
-            }
-
-            _weatherRepository.UpdateWeatherData(weather);
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteWeatherData(int id)
-        {
-            var weather = _weatherRepository.GetWeatherByCountryId(id);
+            var weather = _weatherRepository.GetWeatherByCountryId(countryId);
             if (weather == null)
             {
                 return NotFound();
             }
 
-            _weatherRepository.DeleteWeatherData(id);
+            _weatherRepository.DeleteWeatherData(weather);
             return NoContent();
         }
         
