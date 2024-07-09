@@ -4,7 +4,10 @@
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/CountryWeatherAPI.runtimeconfig.json
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/CountryWeatherAPI.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/CountryWeatherAPI.pdb
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/AutoMapper.dll
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Humanizer.dll
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/PhoneNumbers.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll
@@ -18,6 +21,7 @@
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Mono.TextTemplating.dll
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Npgsql.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
@@ -88,6 +92,7 @@
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.csproj.CoreCompileInputs.cache
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.MvcApplicationPartsAssemblyInfo.cs
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.MvcApplicationPartsAssemblyInfo.cache
+/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.sourcelink.json
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/staticwebassets.build.json
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/staticwebassets.development.json
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/staticwebassets/msbuild.CountryWeatherAPI.Microsoft.AspNetCore.StaticWebAssets.props
@@ -102,9 +107,3 @@
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.pdb
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.genruntimeconfig.cache
 /Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/ref/CountryWeatherAPI.dll
-/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/PhoneNumbers.dll
-/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/obj/Debug/net8.0/CountryWeatherAPI.sourcelink.json
-/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/AutoMapper.dll
-/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/Newtonsoft.Json.dll
-/Users/cemerenkula/RiderProjects/CountryWeatherAPI/CountryWeatherAPI/bin/Debug/net8.0/WeatherExample.json
