@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using System.Net.Http;
 using CountryWeatherAPI.Business.Abstract;
 using CountryWeatherAPI.Business.Concrete;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
