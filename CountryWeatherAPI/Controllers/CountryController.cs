@@ -4,6 +4,7 @@ using CountryWeatherAPI.Models;
 using System;
 using System.Collections.Generic;
 using AutoMapper;
+using CountryWeatherAPI.Business.Abstract;
 using CountryWeatherAPI.Models.DTOs.Response;
 using CountryWeatherAPI.Models.DTOs.Request;
 
@@ -13,97 +14,47 @@ namespace CountryWeatherAPI.Controllers
     [Route("/countries")]
     public class CountryController : ControllerBase
     {
-        private readonly ICountryRepository _countryRepository;
-        private readonly IMapper _mapper;
+        private readonly ICountryBusiness _countryBusiness;
 
-        public CountryController(ICountryRepository countryRepository, IMapper mapper)
+        public CountryController(ICountryBusiness countryBusiness)
         {
-            _countryRepository = countryRepository;
-            _mapper = mapper;
+            _countryBusiness = countryBusiness;
         }
 
         [HttpGet]
         public IActionResult GetAllCountries()
         {
-            var countries = _countryRepository.GetAllCountries();
-            var countryDtos = _mapper.Map<IEnumerable<CountryResponseDto>>(countries);
-            var orderedCountries = countryDtos.OrderBy(c => c.Id);
-            return Ok(orderedCountries);
+            return _countryBusiness.GetAllCountries();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetCountryById(int id)
         {
-            var country = _countryRepository.GetCountryById(id);
-            if (country == null)
-            {
-                return NotFound();
-            }
-            var countryDtos = _mapper.Map<CountryResponseDto>(country);
-            return Ok(countryDtos);
+            return _countryBusiness.GetCountryById(id);
         }
         
         [HttpGet("{lat}/{lon}")]
         public IActionResult GetCountryByCoordinates(int lat, int lon)
         {
-            var country = _countryRepository.GetCountryByCoordinates(lat, lon);
-            if (country == null)
-            {
-                return NotFound();
-            }
-            var countryDtos = _mapper.Map<CountryResponseDto>(country);
-            return Ok(countryDtos);
+            return _countryBusiness.GetCountryByCoordinates(lat, lon);
         }
 
         [HttpPost]
         public IActionResult AddCountry([FromBody] CountryPostDto countryPostDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var country = _mapper.Map<Country>(countryPostDto);
-            _countryRepository.AddCountry(country);
-
-            return CreatedAtAction(nameof(GetCountryById), new { id = country.Id }, country);
+            return _countryBusiness.AddCountry(countryPostDto);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateCountry(int id, [FromBody] CountryPutDto countryPutDto)
         {
-            if (id != countryPutDto.Id)
-            {
-                return BadRequest("Country ID mismatch");
-            }
-
-            var existingCountry = _countryRepository.GetCountryById(id);
-            if (existingCountry == null)
-            {
-                return NotFound();
-            }
-            
-            existingCountry.Name = countryPutDto.Name;
-            existingCountry.LatitudeRangeStart = countryPutDto.LatitudeRangeStart;
-            existingCountry.LatitudeRangeEnd = countryPutDto.LatitudeRangeEnd;
-            existingCountry.LongitudeRangeStart = countryPutDto.LongitudeRangeStart;
-            existingCountry.LongitudeRangeEnd = countryPutDto.LongitudeRangeEnd;
-
-            _countryRepository.UpdateCountry(existingCountry);
-            return NoContent();
+            return _countryBusiness.UpdateCountry(id, countryPutDto);
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteCountry(int id)
         {
-            var country = _countryRepository.GetCountryById(id);
-            if (country == null)
-            {
-                return NotFound();
-            }
-
-            _countryRepository.DeleteCountry(id);
-            return NoContent();
+            return _countryBusiness.DeleteCountry(id);
         }
     }
 }

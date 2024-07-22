@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Net.Http;
+using CountryWeatherAPI.Business.Abstract;
+using CountryWeatherAPI.Business.Concrete;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +37,9 @@ builder.Services.AddDbContext<CountryWeatherDbContext>(options =>
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IResponsiblePersonRepository, ResponsiblePersonRepository>();
 builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
+builder.Services.AddScoped<ICountryBusiness, CountryBusiness>();
+builder.Services.AddScoped<IResponsiblePersonBusiness, ResponsiblePersonBusiness>();
+builder.Services.AddScoped<IWeatherBusiness, WeatherBusiness>();
 builder.Services.AddSingleton(sp =>
     new WeatherRepository(
         sp.GetRequiredService<CountryWeatherDbContext>(),

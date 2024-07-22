@@ -1,12 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using CountryWeatherAPI.Abstract;
-using CountryWeatherAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Net;
+using CountryWeatherAPI.Business.Abstract;
 using CountryWeatherAPI.Models.DTOs.Request;
-using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace CountryWeatherAPI.Controllers
 {
@@ -14,68 +8,41 @@ namespace CountryWeatherAPI.Controllers
     [Route("/weathers")]
     public class WeatherController : ControllerBase
     {
-        private readonly IWeatherRepository _weatherRepository;
-        
-        public WeatherController(IWeatherRepository weatherRepository)
+        private readonly IWeatherBusiness _weatherBusiness;
+
+        public WeatherController(IWeatherBusiness weatherBusiness)
         {
-            _weatherRepository = weatherRepository;
+            _weatherBusiness = weatherBusiness;
         }
 
         [HttpGet]
         public IActionResult GetAllWeatherData()
         {
-            var weatherData = _weatherRepository.GetAllWeatherData();
-            var orderedWeatherData = weatherData.OrderBy(w => w.CountryId);
-            return Ok(orderedWeatherData);
+            return _weatherBusiness.GetAllWeatherData();
         }
 
         [HttpGet("country/{countryId}")]
         public IActionResult GetWeatherByCountryId(int countryId)
         {
-            var weather = _weatherRepository.GetWeatherByCountryId(countryId);
-            if (weather == null)
-            {
-                return NotFound();
-            }
-            return Ok(weather);
+            return _weatherBusiness.GetWeatherByCountryId(countryId);
         }
 
         [HttpGet("coordinates/{lat}/{lon}")]
         public IActionResult GetWeatherByCoordinates(int lat, int lon)
         {
-            var weather = _weatherRepository.GetWeatherByCoordinates(lat, lon);
-            if (weather == null)
-            {
-                return NotFound();
-            }
-            return Ok(weather);
+            return _weatherBusiness.GetWeatherByCoordinates(lat, lon);
         }
 
         [HttpDelete("{countryId}")]
         public IActionResult DeleteWeatherData(int countryId)
         {
-            var weather = _weatherRepository.GetWeatherByCountryId(countryId);
-            if (weather == null)
-            {
-                return NotFound();
-            }
-
-            _weatherRepository.DeleteWeatherData(weather);
-            return NoContent();
+            return _weatherBusiness.DeleteWeatherData(countryId);
         }
-        
+
         [HttpPost("update/{lat}/{lon}")]
         public IActionResult UpdateWeatherData(double lat, double lon)
         {
-            try
-            {
-                _weatherRepository.UpdateWeatherWithRequest(lat, lon);
-                return Ok("Weather data updated successfully.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            return _weatherBusiness.UpdateWeatherData(lat, lon);
         }
     }
 }
